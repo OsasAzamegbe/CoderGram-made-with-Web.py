@@ -1,0 +1,50 @@
+$def with (posts)
+
+<div class="container">
+    $if session["user"] == None:
+        <h1>Please login to access your Profile!</h1>
+    $else:
+        <h1>Profile</h1>
+
+        <div class="row">
+            <ul class="sidebar col-md-4">
+                <li class="active list-unstyled"><a href="/"><span class="mdi mdi-home"></span>Home Feed</a></li><br />
+                <li class= "list-unstyled"><a href="/profile"><span class="mdi mdi-account-circle"></span>Profile</a></li><br />
+                <li class= "list-unstyled"><a href="#"><span class="mdi mdi-email"></span>Messages</a></li><br />
+                <li class= "list-unstyled"><a href="#"><span class="mdi mdi-google-circles-group"></span>Friends</a></li><br />
+                <li class= "list-unstyled"><a href="#"><span class="mdi mdi-google-circles-communities"></span>Communities</a></li><br />
+                <li class= "list-unstyled"><a href="#"><span class="mdi mdi-bell"></span>Notifications</a></li><br />
+                <li class="separator list-unstyled"></li><br />
+                <li class= "list-unstyled"><a href="#"><span class="mdi mdi-settings"></span>Settings</a></li><br />
+                <li class= "list-unstyled"> <a href="#"><span class="mdi mdi-help-circle"></span>Help</a></li><br />
+            </ul>
+
+            <div class="col-md-6">
+                <h3>$session['user']['name']</h3>
+                <h4>@$session['user']['username']</h4>
+                <div class="post-box">
+                    <form id="post-activity">
+                        <textarea name="content" class="post-input" placeholder="What's new, $session['user']['name'].split()[0]?" ></textarea>
+                        <button id="post-button" type="submit" class="btn btn-raised btn-info waves-effect" ><span class="mdi mdi-send"></span>Post</button>
+                    </form>
+                </div>
+
+                $for post in posts:
+                    <div class="post-card">
+                         <div class="header">
+                           <div class="avatar">
+                             <a href="/profile">$post['user']['name'].split()[0] @$post['username']</a>
+                           </div>
+                           <div class="content">
+                                $post['post']
+                           </div>
+                           <div class="footer">
+                             <button class="btn btn-round waves-effect btn-default btn-raised btn-like"><span class="mdi mdi-thumb-up-outline"></span></button>
+                             <button class="btn btn-round waves-effect btn-default btn-raised btn-like"><span class="mdi mdi-comment-text-outline"></span></button>
+                             <button class="btn btn-round waves-effect btn-default btn-raised btn-like"><span class="mdi mdi-share"></span></button>
+                           </div>
+                         </div>
+                    </div>
+            </div>
+        </div>
+</div>

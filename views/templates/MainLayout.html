@@ -1,0 +1,48 @@
+$def with (page)
+$var css: static/css/bootstrap.min.css static/css/bootstrap-material-design.min.css static/css/ripples.min.css
+$var js: static/js/jquery-3.5.0.min.js static/js/bootstrap.min.js static/js/material.min.js static/js/ripples.min.js static/js/scripty.js
+
+<link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.0.46/css/materialdesignicons.min.css">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CoderGram</title>
+
+    $if self.css:
+        $for style in self.css.split():
+            <link rel="stylesheet" href="$style" />
+
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-expand-sm navbar-info navbar-fixed-top">
+
+            <a class="navbar-brand pl-3 pt-2 pr-3" href="/">CoderGram</a>
+
+            <ul class="nav navbar-nav">
+                <li class="nav-item"><a class="nav-link waves-effect px-2" href="/">Home Feed<div class="ripple-container"></div></a></li>
+                <li class="nav-item"><a class="nav-link px-2" href="/discover">Discover<div class="ripple-container"></div></a></li>
+                <li class="nav-item"><a class="nav-link mx-2" href="/profile">Profile<div class="ripple-container"></div></a></li>
+                <li class="nav-item"><a class="nav-link mx-2" href="/settings">Settings<div class="ripple-container"></div></a></li>
+            </ul>
+
+            <div class="ml-auto">
+                $if session["user"] == None:
+                    <a href="/login" class="btn btn-link waves-effect">Login</a>&nbsp;
+                    <a href="/register" class="btn btn-raised btn-default waves-effect">Register</a>&nbsp; &nbsp;
+                $else:
+                    <a id="logout-link" class="btn btn-raised btn-default waves-effect">Logout</a>&nbsp; &nbsp;
+            </div>
+
+        </nav>
+        <br /><br /><br />
+        $:page
+    </div>
+
+    $if self.js:
+        $for script in self.js.split():
+            <script src="$script"></script>
+
+</body>
+</html>
